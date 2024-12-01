@@ -66,6 +66,22 @@
             requestAnimationFrame(moveLogo);
         }
 
+        const audio = document.getElementById('backgroundAudio');
+
+        function togglePlay() {
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
+        
+        function changeVolume(volume) {
+            audio.volume = volume;
+        }
+
+        audio.volume = 0.5;
+
         moveLogo();
     </script>
 </body>
