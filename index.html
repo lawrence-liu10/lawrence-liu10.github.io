@@ -21,28 +21,10 @@
             height: auto;
         }
 
-        #playButton {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            z-index: 1000;
-        }
-        #playButton:hover {
-            background-color: rgba(0, 0, 0, 0.7);
-        }
     </style>
 </head>
 <body>
     <img src="chillguy.png" id="chillguy" alt="Chill Guy">
-
-    <button id="playButton">Play Music</button>
 
     <audio id="backgroundAudio" src="chill_anthem.mp3" loop></audio>
     
@@ -84,7 +66,6 @@
         }
 
         const audio = document.getElementById('backgroundAudio');
-        const playButton = document.getElementById('playButton');
 
         function startAudio() {
             audio.play()
