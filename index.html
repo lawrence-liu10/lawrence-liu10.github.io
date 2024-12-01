@@ -27,7 +27,7 @@
     
     <script>
         const logo = document.getElementById('chillguy');
-        const speed = 2;
+        const speed = 5;
         let dx = speed;
         let dy = speed;
 
@@ -51,44 +51,15 @@
 
             if (x + logoWidth >= viewportWidth || x <= 0) {
                 dx = -dx;
-                changeColor();
             }
             if (y + logoHeight >= viewportHeight || y <= 0) {
                 dy = -dy;
-                changeColor();
             }
 
             logo.style.left = x + 'px';
             logo.style.top = y + 'px';
 
             requestAnimationFrame(moveLogo);
-        }
-
-        function changeColor() {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            const img = new Image();
-            img.src = logo.src;
-            img.onload = () => {
-                canvas.width = img.width;
-                canvas.height = img.height;
-                ctx.drawImage(img, 0, 0);
-
-                ctx.fillStyle = getRandomColor();
-                ctx.globalCompositeOperation = 'source-atop';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-                logo.src = canvas.toDataURL();
-            };
-        }
-
-        function getRandomColor() {
-            const letters = '0123456789ABCDEF';
-            let color = '#';
-            for (let i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
-            }
-            return color;
         }
 
         moveLogo();
