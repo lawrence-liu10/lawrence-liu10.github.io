@@ -20,7 +20,6 @@
             width: 200px;
             height: auto;
         }
-
     </style>
 </head>
 <body>
@@ -29,94 +28,77 @@
     <audio id="backgroundAudio" src="chill_anthem.mp3" loop></audio>
     
     <script>
-        const logo = document.getElementById('chillguy');
-        const speed = 3;
-        let dx = speed;
-        let dy = speed;
-
-        let viewportWidth = window.innerWidth;
-        let viewportHeight = window.innerHeight;
-
-        window.addEventListener('resize', () => {
-            viewportWidth = window.innerWidth;
-            viewportHeight = window.innerHeight;
-        });
-
-        function moveLogo() {
-            let x = logo.offsetLeft;
-            let y = logo.offsetTop;
-
-            x += dx;
-            y += dy;
-
-            const logoWidth = logo.offsetWidth;
-            const logoHeight = logo.offsetHeight;
-
-            if (x + logoWidth >= viewportWidth || x <= 0) {
-                dx = -dx;
-            }
-            if (y + logoHeight >= viewportHeight || y <= 0) {
-                dy = -dy;
-            }
-
-            logo.style.left = x + 'px';
-            logo.style.top = y + 'px';
-
-            requestAnimationFrame(moveLogo);
-        }
-
-        const audio = document.getElementById('backgroundAudio');
-
-        function startAudio() {
-            audio.play()
-                .then(() => {
-                    playButton.style.display = 'none';
-                })
-                .catch((error) => {
-                    console.error('Audio playback failed:', error);
-                });
-        }
-
-        playButton.addEventListener('click', startAudio);
-
-        function setRandomPosition() {
-            const logoWidth = logo.offsetWidth;
-            const logoHeight = logo.offsetHeight;
-
-            const maxX = viewportWidth - logoWidth;
-            const maxY = viewportHeight - logoHeight;
-
-            const randomX = Math.floor(Math.random() * maxX);
-            const randomY = Math.floor(Math.random() * maxY);
-
-            logo.style.left = randomX + 'px';
-            logo.style.top = randomY + 'px';
-        }
-
         window.onload = () => {
+            const logo = document.getElementById('chillguy');
+            const audio = document.getElementById('backgroundAudio');
+            const speed = 3;
+            let dx = speed;
+            let dy = speed;
+    
+            let viewportWidth = window.innerWidth;
+            let viewportHeight = window.innerHeight;
+    
+            window.addEventListener('resize', () => {
+                viewportWidth = window.innerWidth;
+                viewportHeight = window.innerHeight;
+            });
+    
+            function moveLogo() {
+                let x = logo.offsetLeft;
+                let y = logo.offsetTop;
+    
+                x += dx;
+                y += dy;
+    
+                const logoWidth = logo.offsetWidth;
+                const logoHeight = logo.offsetHeight;
+    
+                if (x + logoWidth >= viewportWidth || x <= 0) {
+                    dx = -dx;
+                }
+                if (y + logoHeight >= viewportHeight || y <= 0) {
+                    dy = -dy;
+                }
+    
+                logo.style.left = x + 'px';
+                logo.style.top = y + 'px';
+    
+                requestAnimationFrame(moveLogo);
+            }
+    
+            function togglePlay() {
+                if (audio.paused) {
+                    audio.play().catch((error) => {
+                        console.error('Audio playback failed:', error);
+                    });
+                } else {
+                    audio.pause();
+                }
+            }
+    
+            function setRandomPosition() {
+                const logoWidth = logo.offsetWidth;
+                const logoHeight = logo.offsetHeight;
+    
+                const maxX = viewportWidth - logoWidth;
+                const maxY = viewportHeight - logoHeight;
+    
+                const randomX = Math.floor(Math.random() * maxX);
+                const randomY = Math.floor(Math.random() * maxY);
+    
+                logo.style.left = randomX + 'px';
+                logo.style.top = randomY + 'px';
+            }
+    
             setRandomPosition();
             moveLogo();
+    
+            document.body.addEventListener('click', () => {
+                togglePlay();
+            });
+    
+            audio.volume = 0.5;
         };
-
-        document.body.addEventListener('click', () => {
-            togglePlay();
-        });
-
-        function togglePlay() {
-            if (audio.paused) {
-                audio.play();
-            } else {
-                audio.pause();
-            }
-        }
-        
-        function changeVolume(volume) {
-            audio.volume = volume;
-        }
-
-        audio.volume = 0.5;
-
-        moveLogo();
     </script>
 </body>
 </html>
