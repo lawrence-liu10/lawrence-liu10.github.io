@@ -2915,6 +2915,31 @@ Spotlight -old ver
     transition: transform 0.3s ease;
 }
 
+/* Add these rules to your existing CSS */
+.spotlight .image {
+    position: relative; /* Needed for proper anchor sizing */
+}
+
+.image-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* Optional hover effect (keeps your existing transform) */
+.image-link:hover {
+    cursor: pointer;
+}
+
+/* Ensures image styling remains identical */
+.image-link img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
 /* Table */
 
 	.table-wrapper {
